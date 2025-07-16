@@ -1,0 +1,136 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Machine</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="atm-machine">
+            <div class="atm-header">
+                <h1>🏦 ATM MACHINE</h1>
+                <div class="status" id="status">Welcome! Please insert your card</div>
+            </div>
+            
+            <div class="atm-screen">
+                <div class="screen-content" id="screenContent">
+                    <div class="welcome-screen" id="welcomeScreen">
+                        <h2>Welcome to ATM</h2>
+                        <p>Please enter your PIN to continue</p>
+                        <div class="pin-input">
+                            <input type="password" id="pinInput" maxlength="4" placeholder="Enter PIN">
+                            <button onclick="enterPin()" class="btn-primary">Enter</button>
+                        </div>
+                        <button onclick="resetAllData()" class="btn-secondary" style="margin-top: 16px;">🔄 Reset All Data</button>
+                    </div>
+                    
+                    <div class="menu-screen" id="menuScreen" style="display: none;">
+                        <h2>Select Transaction</h2>
+                        <div class="menu-options">
+                            <button onclick="showBalance()" class="menu-btn">💰 Check Balance</button>
+                            <button onclick="showWithdraw()" class="menu-btn">💸 Withdraw</button>
+                            <button onclick="showDeposit()" class="menu-btn">💳 Deposit</button>
+                            <button onclick="showTransfer()" class="menu-btn">🔄 Transfer</button>
+                            <button onclick="showMiniStatement()" class="menu-btn">📋 Mini Statement</button>
+                            <button onclick="logout()" class="menu-btn logout">🚪 Logout</button>
+                        </div>
+                    </div>
+                    
+                    <div class="balance-screen" id="balanceScreen" style="display: none;">
+                        <h2>Account Balance</h2>
+                        <div class="balance-display">
+                            <span class="balance-amount" id="balanceAmount">$0.00</span>
+                        </div>
+                        <button onclick="backToMenu()" class="btn-secondary">Back to Menu</button>
+                    </div>
+                    
+                    <div class="withdraw-screen" id="withdrawScreen" style="display: none;">
+                        <h2>Withdraw Money</h2>
+                        <div class="amount-input">
+                            <input type="number" id="withdrawAmount" placeholder="Enter amount" min="1">
+                            <div class="quick-amounts">
+                                <button onclick="setAmount(50)" class="quick-btn">$50</button>
+                                <button onclick="setAmount(100)" class="quick-btn">$100</button>
+                                <button onclick="setAmount(200)" class="quick-btn">$200</button>
+                                <button onclick="setAmount(500)" class="quick-btn">$500</button>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button onclick="processWithdraw()" class="btn-primary">Withdraw</button>
+                            <button onclick="backToMenu()" class="btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div class="deposit-screen" id="depositScreen" style="display: none;">
+                        <h2>Deposit Money</h2>
+                        <div class="amount-input">
+                            <input type="number" id="depositAmount" placeholder="Enter amount" min="1">
+                        </div>
+                        <div class="action-buttons">
+                            <button onclick="processDeposit()" class="btn-primary">Deposit</button>
+                            <button onclick="backToMenu()" class="btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div class="transfer-screen" id="transferScreen" style="display: none;">
+                        <h2>Transfer Money</h2>
+                        <div class="transfer-inputs">
+                            <input type="text" id="recipientAccount" placeholder="Recipient Account Number">
+                            <input type="number" id="transferAmount" placeholder="Amount to transfer" min="1">
+                        </div>
+                        <div class="action-buttons">
+                            <button onclick="processTransfer()" class="btn-primary">Transfer</button>
+                            <button onclick="backToMenu()" class="btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div class="statement-screen" id="statementScreen" style="display: none;">
+                        <h2>Mini Statement</h2>
+                        <div class="statement-list" id="statementList">
+                            <!-- Transactions will be populated here -->
+                        </div>
+                        <button onclick="backToMenu()" class="btn-secondary">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="atm-keypad">
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="appendToInput('1')">1</button>
+                    <button class="keypad-btn" onclick="appendToInput('2')">2</button>
+                    <button class="keypad-btn" onclick="appendToInput('3')">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="appendToInput('4')">4</button>
+                    <button class="keypad-btn" onclick="appendToInput('5')">5</button>
+                    <button class="keypad-btn" onclick="appendToInput('6')">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="appendToInput('7')">7</button>
+                    <button class="keypad-btn" onclick="appendToInput('8')">8</button>
+                    <button class="keypad-btn" onclick="appendToInput('9')">9</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="clearInput()">Clear</button>
+                    <button class="keypad-btn" onclick="appendToInput('0')">0</button>
+                    <button class="keypad-btn" onclick="backspace()">⌫</button>
+                </div>
+            </div>
+            
+            <div class="atm-footer">
+                <div class="card-slot">
+                    <div class="card-indicator" id="cardIndicator">💳</div>
+                </div>
+                <div class="receipt-slot">
+                    <div class="receipt-indicator">📄</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
